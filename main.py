@@ -2,11 +2,11 @@ from disnake import Message, Intents, RawReactionActionEvent, Reaction, Member
 from disnake.ext import commands
 from db_func import update_data, get_data, create_data
 
-from config import API, id2Sticker, idAnounsments, idSticker, idObjee, idBot
+from config import *
 
 
 
-nums = ['0️⃣', '1️⃣ ', '2️⃣ ', '3️⃣ ', '4️⃣ ', '5️⃣ ', '6️⃣ ', '7️⃣ ', '8️⃣ ', '9️⃣ ', '🔟']
+nums = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
 
 nums_add = ['0️⃣', ':zero:', '2️⃣ ', '3️⃣ ', '4️⃣ ', '5️⃣ ', '6️⃣ ', '7️⃣ ', '8️⃣ ', '9️⃣ ', '🔟']
 
@@ -52,8 +52,7 @@ async def prikol(msg:Message, count: int)-> None:
             await msg.remove_reaction(x, bot.user)
     print('lox')
     if count <=9:
-        a = bot.get_emoji(1)
-        await msg.add_reaction(a)
+        await msg.add_reaction(nums[count])
     else:
         for x in str(count):
             await msg.add_reaction(nums[int(x)])
@@ -77,6 +76,7 @@ async def on_raw_reaction_add(payload: RawReactionActionEvent):
     msg = await channel.fetch_message(messageid)
 
     if (msg.channel.id == idAnounsments or msg.channel.id == idObjee) and msg.author.id == idPasha:
+        
         if payload.emoji.name in nums:
             user = payload.member
             if channelid == idObjee:
