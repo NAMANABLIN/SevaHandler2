@@ -1,8 +1,8 @@
 from disnake import Message, Intents, RawReactionActionEvent, Reaction, Member
 from disnake.ext import commands
-from db_func import update_data, get_data
+from db_func import update_data, get_data, create_data
 
-from config import *
+from config import API, id2Sticker, idAnounsments, idSticker, idObjee, idBot
 
 
 
@@ -52,7 +52,7 @@ async def prikol(msg:Message, count: int)-> None:
             await msg.remove_reaction(x, bot.user)
     print('lox')
     if count <=9:
-        a = bot.get_emoji(nums_add[count])
+        a = bot.get_emoji(1)
         await msg.add_reaction(a)
     else:
         for x in str(count):
@@ -62,7 +62,8 @@ async def prikol(msg:Message, count: int)-> None:
 @bot.event
 async def on_ready():
     global data
-    print('kek')
+    print('START')
+    # create_data() if you start first time
     data = get_data()
 
 
